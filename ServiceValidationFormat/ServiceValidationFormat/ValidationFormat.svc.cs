@@ -43,9 +43,6 @@ namespace ServiceValidationFormat
             public double Probability { get; set; }
         }
 
-
-
-
         static byte[] GetImageAsByteArray(string imageFilePath)
         {
             FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
@@ -68,20 +65,29 @@ namespace ServiceValidationFormat
         }
 
 
-        public async Task<string> ValidarFormatoINE(byte[] ByteArray)
+        public async Task<string> ValidarFormatoINE(byte[] ByteArray, DocTo Formato)
         {
-           
+
+
+
+
+
             var client = new HttpClient();
             string aprobada = "true";
             string rechazada = "false";
             string evaluacion = "";
             string KeyIA = System.Web.Configuration.WebConfigurationManager.AppSettings["Key"];
             string SisteURL = System.Web.Configuration.WebConfigurationManager.AppSettings["url"];
-            int Escala = Convert.ToInt32( System.Web.Configuration.WebConfigurationManager.AppSettings["Escala"]);
-
+            int Escala = Convert.ToInt32(System.Web.Configuration.WebConfigurationManager.AppSettings["Escala"]);
             //string extension;
 
+
+
             //En este bloque se envía la url y Prediction-Ke a la api de  cognitive de Microsoft sin estos datos no se puede hacer peticiones a la API
+
+            //client.DefaultRequestHeaders.Add("Prediction-Key", "559018cc3d434cef8095da2e8b8dd30c");
+            //string url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.1/Prediction/ee601a04-1f53-4b5a-91bb-e5c276ab7832/image?iterationId=c3dcc62f-485d-4f60-bfe1-cfd73befb5f6";
+
             client.DefaultRequestHeaders.Add("Prediction-Key", KeyIA);
             string url = SisteURL;
 
@@ -229,7 +235,8 @@ namespace ServiceValidationFormat
                 }
             }
             return (evaluacion);
+
         }
 
-    }
+        }
 }

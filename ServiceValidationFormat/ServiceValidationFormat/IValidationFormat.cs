@@ -15,8 +15,9 @@ namespace ServiceValidationFormat
 
     public interface IValidationFormat
     {
+
         [OperationContract]
-        Task<string> ValidarFormatoINE(byte[] ByteArray);
+        Task<string> ValidarFormatoINE(byte[] ByteArray, DocTo Formato);
 
     }
 
