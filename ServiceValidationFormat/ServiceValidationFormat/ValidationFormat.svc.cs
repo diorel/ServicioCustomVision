@@ -93,7 +93,6 @@ namespace ServiceValidationFormat
             //Pasaporte-05
             string KeyIAPasaporte = System.Web.Configuration.WebConfigurationManager.AppSettings["KeyIAPasaporte"];
             string SisteURLPasaporte = System.Web.Configuration.WebConfigurationManager.AppSettings["SisteURLPasaporte"];
-
             //CFE-06
             string KeyIACFE = System.Web.Configuration.WebConfigurationManager.AppSettings["KeyIACFE"];
             string SisteURLCFE = System.Web.Configuration.WebConfigurationManager.AppSettings["SisteURLCFE"];
@@ -103,8 +102,6 @@ namespace ServiceValidationFormat
             //FormatoAu-08
             string KeyIAFormatoAu = System.Web.Configuration.WebConfigurationManager.AppSettings["KeyIAFormatoAu"];
             string SisteURLFormatoAu = System.Web.Configuration.WebConfigurationManager.AppSettings["SisteURLFormatoAu"];
-
-
 
 
             //Escala de aprobacion de formatos 
@@ -427,7 +424,7 @@ namespace ServiceValidationFormat
                     
                     //Reverso INE-04
 
-                    if (DocTo.anversoINE.Equals(1))
+                    if (DocTo.reversoINE.Equals(3))
                     {
                         // Se ingresa La Key del proyecto -INE
 
@@ -950,7 +947,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "CFE"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1010,7 +1007,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "CFE"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
