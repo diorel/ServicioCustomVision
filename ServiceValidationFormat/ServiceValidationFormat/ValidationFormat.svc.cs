@@ -115,7 +115,7 @@ namespace ServiceValidationFormat
 
                     //Anverso INE-02
 
-                    if (DocTo.anversoINE.Equals(1))
+                    if (Formato.Equals(DocTo.anversoINE))
                     {
                         client.DefaultRequestHeaders.Add("Prediction-Key", KeyIAanversoINE);
                         string url02 = SisteURLanversoINE;
@@ -421,10 +421,10 @@ namespace ServiceValidationFormat
                     break;
                 case DocTo.reversoINE:
                 case DocTo.reversoIFE:
-                    
-                    //Reverso INE-04
 
-                    if (DocTo.reversoINE.Equals(3))
+                    //Reverso INE-04          
+                    //if (DocTo.reversoINE.Equals(3))
+                     if (Formato.Equals(DocTo.reversoINE))
                     {
                         // Se ingresa La Key del proyecto -INE
 
@@ -1246,7 +1246,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion1 = (from cust in model.Predictions
-                                                    where cust.Tag == "Documentos"
+                                                    where cust.Tag == "Documnetos"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1305,7 +1305,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion1 = (from cust in model.Predictions
-                                                    where cust.Tag == "Documentos"
+                                                    where cust.Tag == "Documnetos"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
