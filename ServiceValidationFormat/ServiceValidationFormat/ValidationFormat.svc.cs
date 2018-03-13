@@ -330,7 +330,7 @@ namespace ServiceValidationFormat
 
 
                                     var Descripcion2 = (from cust in model.Predictions
-                                                        where cust.Tag == "INE"
+                                                        where cust.Tag == "IFE"
                                                         select new
                                                         {
                                                             Probabilidad = cust.Probability.ToString("P1")
@@ -390,7 +390,7 @@ namespace ServiceValidationFormat
 
 
                                     var Descripcion2 = (from cust in model.Predictions
-                                                        where cust.Tag == "INE"
+                                                        where cust.Tag == "IFE"
                                                         select new
                                                         {
                                                             Probabilidad = cust.Probability.ToString("P1")
@@ -640,7 +640,7 @@ namespace ServiceValidationFormat
 
 
                                     var Descripcion2 = (from cust in model.Predictions
-                                                        where cust.Tag == "INE"
+                                                        where cust.Tag == "IFE"
                                                         select new
                                                         {
                                                             Probabilidad = cust.Probability.ToString("P1")
@@ -700,7 +700,7 @@ namespace ServiceValidationFormat
 
 
                                     var Descripcion2 = (from cust in model.Predictions
-                                                        where cust.Tag == "INE"
+                                                        where cust.Tag == "IFE"
                                                         select new
                                                         {
                                                             Probabilidad = cust.Probability.ToString("P1")
@@ -794,7 +794,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "Pasaporte"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -854,7 +854,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "Pasaporte"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1102,7 +1102,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "TELMEX"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1162,7 +1162,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "TELMEX"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1254,7 +1254,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "AV"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1314,7 +1314,7 @@ namespace ServiceValidationFormat
 
 
                                 var Descripcion2 = (from cust in model.Predictions
-                                                    where cust.Tag == "INE"
+                                                    where cust.Tag == "AV"
                                                     select new
                                                     {
                                                         Probabilidad = cust.Probability.ToString("P1")
@@ -1351,5 +1351,57 @@ namespace ServiceValidationFormat
 
         }
 
+
+
+
+
+
+        public string ConvertirPDFaImagen(string Ruta)
+        {
+            PdfDocument doc = new PdfDocument();
+            string extension;
+
+            extension = Path.GetExtension(Ruta);
+            if (extension.Equals(".pdf"))
+            {
+
+                doc.LoadFromFile(Ruta);
+
+                Image bmp = doc.SaveAsImage(0);
+
+                Image emf = doc.SaveAsImage(0, Spire.Pdf.Graphics.PdfImageType.Metafile);
+
+                Image zoomImg = new Bitmap((int)(emf.Size.Width * 2), (int)(emf.Size.Height * 2));
+
+                using (Graphics g = Graphics.FromImage(zoomImg))
+
+                {
+                    g.ScaleTransform(2.0f, 2.0f);
+
+                    g.DrawImage(emf, new Rectangle(new Point(0, 0), emf.Size), new Rectangle(new Point(0, 0), emf.Size), GraphicsUnit.Pixel);
+
+                    try
+                    {
+                        // bmp.Save(@"~\\img\\INESantanderIMG.jpg", ImageFormat.Jpeg);
+                        //  bmp.Save(@"C:\ConvertPDF\INESantanderIMG.jpg", ImageFormat.Jpeg);
+                        //  bmp.Save(@"..\..\..\img\INESantanderIMG.jpg", ImageFormat.Jpeg);
+                        bmp.Save(@" C:\Users\rcortes\Documents\GitHub\RedRaul\WcfService1\WcfService1\img", ImageFormat.Jpeg);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.InnerException.Message);
+
+                    }
+                }
+
+            }
+            return null;
         }
+
+
+
+
+
+    }
 }

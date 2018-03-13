@@ -19,6 +19,13 @@ namespace ServiceValidationFormat
         [OperationContract]
         Task<string> ValidarFormato(byte[] ByteArray, DocTo Formato);
 
+
+
+        [OperationContract]
+        string ConvertirPDFaImagen(string Ruta);
+
+
+
     }
 
 
