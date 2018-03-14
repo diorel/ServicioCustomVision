@@ -65,14 +65,39 @@ namespace ServiceValidationFormat
         }
 
 
-        public async Task<string> ValidarFormato(byte[] ByteArray, DocTo Formato)
+        public async Task<string> ValidarFormato(byte[] ByteArray, DocTo Formato, string Extencion)
         {
             var client = new HttpClient();
             string aprobada = "true";
             string rechazada = "false";
             string evaluacion = "";
 
-            
+
+
+            PdfDocument doc = new PdfDocument();
+            MemoryStream msz4 = new MemoryStream();
+
+            if (Extencion.Equals("PDF"))
+            {
+                doc.LoadFromBytes(ByteArray);
+                Image x = doc.SaveAsImage(0);
+                x.Save(msz4, ImageFormat.Jpeg);
+                byte[] ByteArrayIMG = msz4.GetBuffer();
+
+            }
+            else
+            {
+
+
+
+            }
+
+
+
+
+
+
+
             //INE por los dos lados 
             string KeyIA = System.Web.Configuration.WebConfigurationManager.AppSettings["Key"];
             string SisteURL = System.Web.Configuration.WebConfigurationManager.AppSettings["url"];
@@ -123,6 +148,16 @@ namespace ServiceValidationFormat
                         //En este bloque se envía la url y Prediction-Key a la api de  cognitive de Microsoft sin estos datos no se puede hacer peticiones a la API
 
                         HttpResponseMessage response02;
+
+
+
+                        
+                       
+
+                    
+
+
+
 
                         int ImageSize02 = ByteArray.Length;
 
@@ -826,6 +861,9 @@ namespace ServiceValidationFormat
                     }
                     else
                     {
+
+                        //modificiacion bite 
+
                         using (var content = new ByteArrayContent(ByteArray))
                         {
                             content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");

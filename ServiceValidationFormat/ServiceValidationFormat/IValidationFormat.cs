@@ -17,7 +17,7 @@ namespace ServiceValidationFormat
     {
 
         [OperationContract]
-        Task<string> ValidarFormato(byte[] ByteArray, DocTo Formato);
+        Task<string> ValidarFormato(byte[] ByteArray, DocTo Formato,string Extencion);
 
 
 
